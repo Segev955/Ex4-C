@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include "graph.h"
 
 
 void build_graph_cmd(pnode *head) {
@@ -61,6 +63,34 @@ pnode getNode(pnode* head, int id) {
         }
     }
     return NULL;
+}
+
+void delete_node_cmd(pnode *head){
+    int id;
+    scanf("%d",id);
+    pnode i= *head;
+    if(!getNode(head,id)) {
+        while (i->node_num != id) {
+            if(i->next->node_num==id){
+                pnode j=i->next;
+                i->next=j->next;
+                pedge e= j->edges;
+                pedge n;
+                while (e!=NULL){
+                    n=e;
+                    e=e->next;
+                    free(n);
+                }
+                free(j);
+            }
+        }
+    }
+}
+
+void deleteGraph_cmd(pnode* head){
+    while ((*head)->next!=NULL){
+        delete_node_cmd(head);
+    }
 }
 
 
