@@ -1,21 +1,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "graph.h"
+#define null 0
 pnode getNode(pnode* head, int id);
 
+int size=0;
 
 void build_graph_cmd(pnode *head) {
     deleteGraph_cmd(head);
-    int nodesize = 0;
+    int nodesize = null;
     scanf("%d", &nodesize);
     char n = 'n';
     int x = 0;
     for (int i = 0; i < nodesize; i++) {
         scanf("%c", &n);
         insert_node_cmd(head);
+        size++;
     }
 }
 
+pnode copy(pnode *head,int gsize){
+    for(int i=0; i < gsize;i++){
+
+    }
+}
 
 void insert_node_cmd(pnode *head) {
     int id = -1;
@@ -28,6 +36,7 @@ void insert_node_cmd(pnode *head) {
         n->edges = NULL;
         n->next = *head; //put n befor head
         *head = n; // set n to be new head
+        size++;
     }
     else { //if node exist
         pedge e = n->edges;
@@ -35,10 +44,11 @@ void insert_node_cmd(pnode *head) {
             pedge t = e->next;
             free(e);
             e = t;
+            size--;
         }
     }
     int destid = -1;
-    while(scanf("%d", &destid) != NULL) {
+    while(scanf("%d", &destid) != null) {
         pnode dest = getNode(head,destid);
         int w = -1;
         scanf("%d", &w);
@@ -81,6 +91,7 @@ void delete_node_cmd(pnode *head){
                     n=e;
                     e=e->next;
                     free(n);
+                    size--;
                 }
                 free(j);
             }
@@ -92,6 +103,19 @@ void deleteGraph_cmd(pnode* head){
     while ((*head)->next!=NULL){
         delete_node_cmd(head);
     }
+    size=0;
 }
+
+void shortsPath_cmd(pnode head){
+    int src=null ,dest=null;
+    scanf("%d%d", &src, &dest);
+    if(src==dest) {
+        printf("%d", null);
+        return;
+    }
+
+}
+
+
 
 
