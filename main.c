@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "../graph.h"
+#include "graph.h"
 int main() {
     char Case;
     int size;
     scanf("%c", &Case);
-    pnode head ={0,0,NULL};
-    build_graph_cmd(head);
+    pnode firstHead = NULL;
+    pnode *head = &firstHead;
     switch (Case) {
         case 'A':
             build_graph_cmd(head);
