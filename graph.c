@@ -13,17 +13,32 @@ void build_graph_cmd(pnode *head) {
     int nodesize = null;
     scanf("%d", &nodesize);
     char n = 'n';
-    int x = 0;
+    scanf("%c", &n);
     for (int i = 0; i < nodesize; i++) {
         scanf("%c", &n);
         insert_node_cmd(head);
-        size++;
     }
 }
 
 pnode copy(pnode *head, int gsize) {
     for (int i = 0; i < gsize; i++) {
 
+    }
+}
+void printGraph_cmd(pnode head)
+{
+    pnode nodeIndex = head;
+    while (nodeIndex != NULL)
+    {
+        printf("Node %d: ", nodeIndex->node_num);
+        pedge edgeIndex = nodeIndex->edges;
+        while (edgeIndex != NULL)
+        {
+            printf("dest %d: weight %d, ", edgeIndex->endpoint->node_num, edgeIndex->weight);
+            edgeIndex = edgeIndex->next;
+        }
+        printf("\n");
+        nodeIndex = nodeIndex->next;
     }
 }
 
@@ -38,7 +53,6 @@ void insert_node_cmd(pnode *head) {
         n->edges = NULL;
         n->next = *head; //put n befor head
         *head = n; // set n to be new head
-        size++;
     } else { //if node exist - delete edges out
         pedge e = n->edges;
         while (e != NULL) {
@@ -47,21 +61,29 @@ void insert_node_cmd(pnode *head) {
             e = t;
         }
     }
-    pedge e = n->edges;
+    pedge *e = &(n->edges);
     int destid = -1;
     while (scanf("%d", &destid) != null) {
         if (destid == 'n') {
             break;
         }
-        //connect
         pnode dest = getNode(head, destid);
+        if(dest == NULL) { //if not exist
+            dest = (pnode) malloc(sizeof(node));
+            dest->node_num = destid;
+            dest->edges = NULL;
+            dest->next = *head; //put n befor head
+            *head = dest; // set n to be new head
+        }
+        //connect
+
         int w = -1;
         scanf("%d", &w);
-        pedge edg = (pedge) malloc(sizeof(edge));
-        edg->weight = w;
-        edg->endpoint = dest;
-        edg->next = e;
-        e = edg;
+        *e = (pedge)malloc(sizeof(edge));
+        (*e)->endpoint = dest;
+        (*e)->weight = w;
+        (*e)->next = NULL;
+        e = &((*e)->next);
     }
 }
 
@@ -79,11 +101,12 @@ pnode getNode(pnode *head, int id) {
 }
 
 void delete_node_cmd(pnode *head) {
-    int id;
-    scanf("%d", id);
+    int id = -1;
+    scanf("%d", &id);
+    pnode n = getNode(head, id);
     pnode i = *head;
-    if (!getNode(head, id)) {
-        while (i->node_num != id) {
+    if (n != NULL) {
+        while ((*head) != n) {
             if (i->next->node_num == id) {
                 pnode j = i->next;
                 i->next = j->next;
@@ -93,7 +116,6 @@ void delete_node_cmd(pnode *head) {
                     n = e;
                     e = e->next;
                     free(n);
-                    size--;
                 }
                 free(j);
             }
@@ -102,13 +124,12 @@ void delete_node_cmd(pnode *head) {
 }
 
 void deleteGraph_cmd(pnode *head) {
-    while ((*head)->next != NULL) {
+    while (*head != NULL) {
         delete_node_cmd(head);
     }
-    size = 0;
 }
 
-void shortsPath_cmd(pnode head) {
+/*void shortsPath_cmd(pnode head) {
     int src = null, dest = null;
     scanf("%d%d", &src, &dest);
     if (src == dest) {
@@ -116,7 +137,7 @@ void shortsPath_cmd(pnode head) {
         return;
     }
 
-}
+}*/
 
 
 

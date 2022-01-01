@@ -3,26 +3,33 @@
 int main() {
     char Case;
     int size;
-    scanf("%c", &Case);
+//    scanf("%c", &Case);
     pnode firstHead = NULL;
     pnode *head = &firstHead;
-    switch (Case) {
-        case 'A':
+    while (scanf("%c", &Case) != EOF) {
+        if (Case == 'A') {
             build_graph_cmd(head);
-            break;
-        case 'B':
+        }
+        else if (Case == 'B') {
             insert_node_cmd(head);
-            break;
-        case 'D':
+            printGraph_cmd(*head);
+        }
+        else if (Case == 'D') {
             delete_node_cmd(head);
-            break;
-        case 'S':
-            shortsPath_cmd(head);
-            break;
-        case 'T':
-            TSP_cmd(head);
-            break;
-        default:
-            break;
+            printGraph_cmd(*head);
+        }
+        else if (Case == 'S') {
+            int src = -1;
+            int dest = -1;
+            scanf("%d", &src);
+            scanf("%d", &dest);
+            int ans = shortsPath_cmd(head, src, dest);
+            printf("%d", ans);
+        }
+        else if (Case == 'T') {
+            int ans = TSP_cmd(head);
+            printf("%d", ans);
+        }
+
     }
 }
