@@ -104,12 +104,12 @@ void delete_node_cmd(pnode *head) {
     int id = -1;
     scanf("%d", &id);
     pnode n = getNode(head, id);
-    pnode i = *head;
+    //node i = *head;
     if (n != NULL) {
-        while ((*head) != n) {
-            if (i->next->node_num == id) {
-                pnode j = i->next;
-                i->next = j->next;
+        while ((*head) != NULL) {
+            if ((*head)->next->node_num == id) {
+                pnode j = (*head)->next;
+                (*head)->next = j->next;
                 pedge e = j->edges;
                 pedge n;
                 while (e != NULL) {
@@ -119,6 +119,7 @@ void delete_node_cmd(pnode *head) {
                 }
                 free(j);
             }
+            (*head)=(*head)->next;
         }
     }
 }
@@ -139,6 +140,15 @@ void deleteGraph_cmd(pnode *head) {
 
 }*/
 
-
+//void delete_node(pnode *head){
+//    int id=-1;
+//    scanf("%d",&id);
+//    while((*head)->node_num != id){
+//        if((*head)->next->node_num ==id){
+//            pedge e= (*head)->next->edges;
+//            while(e->next ==NULL )
+//        }
+//    }
+//}
 
 
