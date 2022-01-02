@@ -22,11 +22,11 @@ int main() {
             scanf("%d", &src);
             scanf("%d", &dest);
             int ans = shortsPath_cmd(head, src, dest);
-            printf("Dijsktra shortest path: %d\n", ans);
+            printf("Dijsktra shortest path: %d \n", ans);
         }
         else if (Case == 'T') {
             int ans = TSP_cmd(head);
-            printf("TSP shortest path: %d\n", ans);
+            printf("TSP shortest path: %d \n", ans);
         }
 
     }
