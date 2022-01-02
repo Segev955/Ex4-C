@@ -16,10 +16,6 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next;
 } node, *pnode;
 
-typedef struct TSP_ {
-    int node_num;
-    struct TSP_ *next;
-} tsp, *ptsp;
 
 void build_graph_cmd(pnode *head);
 void insert_node_cmd(pnode *head);

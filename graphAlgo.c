@@ -105,14 +105,6 @@ int shortsPath_cmd(pnode *head, int src, int dest) {
 }
 
 
-
-//void maxVal(pcopy *head) {
-//    while ((*head)->next != NULL) {
-//        (*head)->tag = -1;
-//        (*head)->weight = infinity;
-//    }
-//}
-
 int *newArr(int n) {
     int *arr = (int *) malloc(sizeof(int) * n);
     for (int i = 0; i < n; ++i) {
@@ -121,7 +113,7 @@ int *newArr(int n) {
     return arr;
 }
 
-void clearArr(int *arr, int n) {
+/*void clearArr(int *arr, int n) {
     for (int i = 0; i < n; ++i) {
         *(arr + i) = -1;
     }
@@ -165,7 +157,7 @@ void shortsPathTSP(pnode *head, int src, int dest, int *tempLst, int *dis) {
         i++;
     }
 
-}
+}*/
 void swap(int *i, int *j) {
     int temp = *i;
     *i = *j;
@@ -175,7 +167,6 @@ int TSP_cmd(pnode *head) {
     int listSize;
     scanf("%d", &listSize);
     int *node_lst = newArr(listSize);
-    int *newLst = (int *) malloc(sizeof(int) * listSize);
     int finalDis = infinity;
     int bool = 0;
 
@@ -198,6 +189,7 @@ int TSP_cmd(pnode *head) {
             }
         }
     }
+    free(node_lst);
     if (!bool)
         return -1;
     return finalDis;

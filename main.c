@@ -2,8 +2,6 @@
 #include "graph.h"
 int main() {
     char Case;
-    int size;
-//    scanf("%c", &Case);
     pnode firstHead = NULL;
     pnode *head = &firstHead;
     while (scanf("%c", &Case) != EOF) {
