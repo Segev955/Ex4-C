@@ -12,11 +12,11 @@ int main() {
         }
         else if (Case == 'B') {
             insert_node_cmd(head);
-            printGraph_cmd(*head);
+//            printGraph_cmd(*head);
         }
         else if (Case == 'D') {
             delete_node_cmd(head);
-            printGraph_cmd(*head);
+//            printGraph_cmd(*head);
         }
         else if (Case == 'S') {
             int src = -1;
@@ -24,11 +24,11 @@ int main() {
             scanf("%d", &src);
             scanf("%d", &dest);
             int ans = shortsPath_cmd(head, src, dest);
-            printf("%d", ans);
+            printf("Dijsktra shortest path: %d\n", ans);
         }
         else if (Case == 'T') {
             int ans = TSP_cmd(head);
-            printf("%d", ans);
+            printf("TSP shortest path: %d\n", ans);
         }
 
     }

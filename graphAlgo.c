@@ -7,8 +7,6 @@
 
 typedef struct dijkstra_graph {
     pnode node;
-//    int node_num;
-//    pedge edges;
     int tag;
     int weight;
     int done; //done == 1
@@ -46,6 +44,7 @@ pcopy getPCopyNode(pcopy head, int id) {
     }
     return NULL;
 }
+
 
 void freeList(pcopy list) {
     while (list != NULL) {
@@ -165,9 +164,46 @@ void shortsPathTSP(pnode *head, int src, int dest, int *tempLst, int *dis) {
         xNode = getPCopyNode(l, xNode->tag);
         i++;
     }
-}
 
+}
+void swap(int *i, int *j) {
+    int temp = *i;
+    *i = *j;
+    *j = temp;
+}
 int TSP_cmd(pnode *head) {
+    int listSize;
+    scanf("%d", &listSize);
+    int *node_lst = newArr(listSize);
+    int *newLst = (int *) malloc(sizeof(int) * listSize);
+    int finalDis = infinity;
+    int bool = 0;
+
+    for (int i = 1; i <= listSize; ++i) { //nodeList
+        for (int j = 0; j < listSize-1; ++j) {
+            swap(&(node_lst[j]),&(node_lst[j+1]));
+            int path = 0;
+            int bool2 = 1;
+            for (int k = 0; k < listSize - 1; ++k) {
+                int dist = shortsPath_cmd(head,*(node_lst+k),*(node_lst+(k+1)));
+                if (dist == -1) {
+                    bool2 = 0;
+                    break;
+                }
+                path += dist;
+            }
+            if (path < finalDis && path != 0 && bool2) {
+                finalDis = path;
+                bool = 1;
+            }
+        }
+    }
+    if (!bool)
+        return -1;
+    return finalDis;
+
+}
+/*int TSP_cmd(pnode *head) {
     int listSize;
     scanf("%d", &listSize);
     int *node_lst = newArr(listSize);
@@ -187,6 +223,8 @@ int TSP_cmd(pnode *head) {
                 if (newLst[j] == -1)
                     continue;
                 int dis = shortsPath_cmd(head, s, newLst[j]);
+                if (dis == -1)
+                    break;
                 if (dis < min) {
                     bool = 1;
                     min = dis;
@@ -205,7 +243,7 @@ int TSP_cmd(pnode *head) {
         }
     }
     return finaldis2;
-}
+}*/
 /*int TSP_cmd(pnode *head) {
     int listSize;
     scanf("%d", &listSize);
