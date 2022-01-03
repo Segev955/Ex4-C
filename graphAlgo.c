@@ -16,6 +16,7 @@ typedef struct dijkstra_graph {
 pcopy copyg(pnode head, int src) {
     pcopy firstHead = NULL;
     pcopy *temp = &firstHead;
+
     while (head != NULL) {
         (*temp) = (pcopy) malloc(sizeof(copy));
         (*temp)->node = head;
@@ -26,7 +27,6 @@ pcopy copyg(pnode head, int src) {
             (*temp)->weight = 0;
         }
         (*temp)->next = NULL;
-
         head = head->next;
         temp = &((*temp)->next);
     }
@@ -48,10 +48,12 @@ pcopy getPCopyNode(pcopy head, int id) {
 
 void freeList(pcopy list) {
     while (list != NULL) {
-        pcopy t = list;
-        list = list->next;
-        free(t);
+        pcopy t = list->next;
+        free(list);
+        list = t;
+
     }
+    free(list);
 }
 
 pcopy listMin(pcopy list) {
@@ -98,6 +100,7 @@ int shortsPath_cmd(pnode head, int src, int dest) {
     pcopy xNode = getPCopyNode(l, dest);
     int dis = xNode->weight;
     if (dis == infinity) {
+        freeList(l);
         return -1;
     }
     freeList(l);

@@ -30,8 +30,6 @@ int main() {
         }
 
     }
-    if (feof(stdin)) {
-        deleteGraph_cmd(head);
-    }
+    deleteGraph_cmd(head);
     return 0;
 }
