@@ -4,13 +4,9 @@
 
 #define null 0
 
-pnode getNode(pnode *head, int id);
-
+//pnode getNode(pnode *head, int id);
 void free_edges(pnode edg);
-
 void del_edge(pnode *head, int nodeId);
-
-int size = 0;
 
 void build_graph_cmd(pnode *head) {
     deleteGraph_cmd(head);

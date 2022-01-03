@@ -48,9 +48,9 @@ pcopy getPCopyNode(pcopy head, int id) {
 
 void freeList(pcopy list) {
     while (list != NULL) {
-        pcopy l = list;
+        pcopy t = list;
         list = list->next;
-        free(l);
+        free(t);
     }
 }
 
@@ -92,8 +92,8 @@ void dijkstra(pcopy l) {
     }
 }
 
-int shortsPath_cmd(pnode *head, int src, int dest) {
-    pcopy l = copyg(*head, src);
+int shortsPath_cmd(pnode head, int src, int dest) {
+    pcopy l = copyg(head, src);
     dijkstra(l);
     pcopy xNode = getPCopyNode(l, dest);
     int dis = xNode->weight;
@@ -163,6 +163,7 @@ void swap(int *i, int *j) {
     *i = *j;
     *j = temp;
 }
+
 int TSP_cmd(pnode *head) {
     int listSize;
     scanf("%d", &listSize);
@@ -171,12 +172,12 @@ int TSP_cmd(pnode *head) {
     int bool = 0;
 
     for (int i = 1; i <= listSize; ++i) { //nodeList
-        for (int j = 0; j < listSize-1; ++j) {
-            swap(&(node_lst[j]),&(node_lst[j+1]));
+        for (int j = 0; j < listSize - 1; ++j) {
+            swap(&(node_lst[j]), &(node_lst[j + 1]));
             int path = 0;
             int bool2 = 1;
             for (int k = 0; k < listSize - 1; ++k) {
-                int dist = shortsPath_cmd(head,*(node_lst+k),*(node_lst+(k+1)));
+                int dist = shortsPath_cmd(*head, *(node_lst + k), *(node_lst + (k + 1)));
                 if (dist == -1) {
                     bool2 = 0;
                     break;

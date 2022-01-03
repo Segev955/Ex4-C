@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "graph.h"
 int main() {
-    char Case;
+    char Case = 'a';
     pnode firstHead = NULL;
     pnode *head = &firstHead;
     while (scanf("%c", &Case) != EOF) {
@@ -21,7 +21,7 @@ int main() {
             int dest = -1;
             scanf("%d", &src);
             scanf("%d", &dest);
-            int ans = shortsPath_cmd(head, src, dest);
+            int ans = shortsPath_cmd(*head, src, dest);
             printf("Dijsktra shortest path: %d \n", ans);
         }
         else if (Case == 'T') {
@@ -30,6 +30,8 @@ int main() {
         }
 
     }
-    deleteGraph_cmd(head);
+    if (feof(stdin)) {
+        deleteGraph_cmd(head);
+    }
     return 0;
 }
